@@ -1,6 +1,9 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import EnhancedWalletConnection from '@/components/EnhancedWalletConnection';
+import GameHeaderUser from '@/components/GameHeaderUser';
+import { useUserConnection } from '@/hooks/useUserConnection';
 
 export default function ArbiRun() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -14,6 +17,9 @@ export default function ArbiRun() {
   const [countdown, setCountdown] = useState(3);
   const [maxLevel, setMaxLevel] = useState(1);
   const [hoveredGate, setHoveredGate] = useState<{x: number, y: number, term: string} | null>(null);
+  
+  // Get connection state
+  const { isConnected, isSDKLoaded } = useUserConnection();
 
   // Level configuration with goals and stories
   const levelConfig = {
@@ -386,7 +392,7 @@ export default function ArbiRun() {
     let touchStartTime = 0;
     const minSwipeDistance = 30; // Minimum distance for swipe
     const maxSwipeTime = 300; // Maximum time for swipe (ms)
-    let tooltipTouchTimer: NodeJS.Timeout | null = null;
+    const tooltipTouchTimer: NodeJS.Timeout | null = null;
     
     const handleTouchStart = (e: TouchEvent) => {
       e.preventDefault();
@@ -768,6 +774,12 @@ export default function ArbiRun() {
   };
 
   const startGame = () => {
+    // Check if wallet is connected before starting game
+    if (!isConnected) {
+      alert('Please connect your wallet to start playing ArbiRun!');
+      return;
+    }
+    
     // Reset to level 1 when starting fresh
     setCurrentLevel(1);
     setWealth(10);
@@ -817,15 +829,27 @@ export default function ArbiRun() {
           <div className="text-6xl font-bold text-transparent bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text mb-8">
             ArbiRun
           </div>
-          <div className="text-xl text-cyan-300 mb-12">
+          <div className="text-xl text-cyan-300 mb-8">
             Navigate through the DeFi gates and manage your wealth!
           </div>
+          
+          {/* Wallet Connection Component */}
+          <div className="mb-8 max-w-md mx-auto">
+            <EnhancedWalletConnection />
+          </div>
+          
           <div className="flex flex-col space-y-4">
             <button
               onClick={startGame}
-              className="bg-gradient-to-r from-green-600 to-cyan-600 hover:from-green-700 hover:to-cyan-700 text-white px-12 py-4 rounded-xl font-bold text-xl shadow-lg hover:shadow-green-500/25 transition-all duration-300 border border-green-400/30"
+              className={`${
+                isConnected 
+                  ? 'bg-gradient-to-r from-green-600 to-cyan-600 hover:from-green-700 hover:to-cyan-700 hover:shadow-green-500/25' 
+                  : 'bg-gradient-to-r from-gray-600 to-slate-600 hover:from-gray-700 hover:to-slate-700'
+              } text-white px-12 py-4 rounded-xl font-bold text-xl shadow-lg transition-all duration-300 border ${
+                isConnected ? 'border-green-400/30' : 'border-gray-400/30'
+              }`}
             >
-              Start Game
+              {isConnected ? '🚀 Start Game' : '🔒 Connect Wallet to Play'}
             </button>
             <button
               onClick={showLeaderboard}
@@ -937,6 +961,11 @@ export default function ArbiRun() {
                     ℹ️
                   </button>
                 </div>
+              </div>
+
+              {/* User Display in Game Header */}
+              <div className="absolute top-20 right-4 z-10">
+                <GameHeaderUser />
               </div>
 
               {/* Wealth Display */}
