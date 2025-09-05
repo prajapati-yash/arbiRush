@@ -120,7 +120,7 @@ export default function ArbiRush() {
         x: number;
         y: number;
         lane: number;
-        type: 'add' | 'multiply' | 'subtract' | 'divide';
+        type: 'add' | 'multiply' | 'subtract' | 'divide' | 'percentage';
         emoji: string;
         effect: string;
         value: number;
@@ -137,202 +137,67 @@ export default function ArbiRush() {
 
     const lanePositions = [160, 240]; // Left and right positions only
 
-    // Balanced gate generation algorithm that ensures winnable paths
+    // Predefined gate configurations for each level
+    const levelGates = {
+      1: [
+        [{ emoji: '💰', effect: '+10', type: 'add', value: 10, term: 'airdrop' }, { emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }],
+        [{ emoji: '💸', effect: '-5', type: 'subtract', value: 5, term: 'gasFee' }, { emoji: '🌊', effect: '÷2', type: 'divide', value: 2, term: 'slippage' }],
+        [{ emoji: '💰', effect: '+5', type: 'add', value: 5, term: 'airdrop' }, { emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }],
+        [{ emoji: '📉', effect: '-10%', type: 'percentage', value: 10, term: 'impermanentLoss' }, { emoji: '💰', effect: '+10', type: 'add', value: 10, term: 'airdrop' }],
+        [{ emoji: '💰', effect: '+5', type: 'add', value: 5, term: 'airdrop' }, { emoji: '🌊', effect: '÷2', type: 'divide', value: 2, term: 'slippage' }],
+        [{ emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }, { emoji: '💸', effect: '-5', type: 'subtract', value: 5, term: 'gasFee' }],
+        [{ emoji: '💰', effect: '+10', type: 'add', value: 10, term: 'airdrop' }, { emoji: '🌊', effect: '÷2', type: 'divide', value: 2, term: 'slippage' }]
+      ],
+      2: [
+        [{ emoji: '💰', effect: '+20', type: 'add', value: 20, term: 'airdrop' }, { emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }],
+        [{ emoji: '📉', effect: '-10%', type: 'percentage', value: 10, term: 'impermanentLoss' }, { emoji: '🌊', effect: '÷2', type: 'divide', value: 2, term: 'slippage' }],
+        [{ emoji: '💰', effect: '+15', type: 'add', value: 15, term: 'airdrop' }, { emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }],
+        [{ emoji: '💸', effect: '-20', type: 'subtract', value: 20, term: 'gasFee' }, { emoji: '💰', effect: '+10', type: 'add', value: 10, term: 'airdrop' }],
+        [{ emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }, { emoji: '💸', effect: '-15', type: 'subtract', value: 15, term: 'gasFee' }],
+        [{ emoji: '💰', effect: '+20', type: 'add', value: 20, term: 'airdrop' }, { emoji: '🌊', effect: '÷2', type: 'divide', value: 2, term: 'slippage' }],
+        [{ emoji: '💰', effect: '+15', type: 'add', value: 15, term: 'airdrop' }, { emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }]
+      ],
+      3: [
+        [{ emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }, { emoji: '💰', effect: '+25', type: 'add', value: 25, term: 'airdrop' }],
+        [{ emoji: '💸', effect: '-25', type: 'subtract', value: 25, term: 'gasFee' }, { emoji: '🌊', effect: '÷2', type: 'divide', value: 2, term: 'slippage' }],
+        [{ emoji: '💰', effect: '+40', type: 'add', value: 40, term: 'airdrop' }, { emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }],
+        [{ emoji: '📉', effect: '-10%', type: 'percentage', value: 10, term: 'impermanentLoss' }, { emoji: '💰', effect: '+30', type: 'add', value: 30, term: 'airdrop' }],
+        [{ emoji: '🚀', effect: '×3', type: 'multiply', value: 3, term: 'moonshot' }, { emoji: '💸', effect: '-20', type: 'subtract', value: 20, term: 'gasFee' }],
+        [{ emoji: '🌊', effect: '÷2', type: 'divide', value: 2, term: 'slippage' }, { emoji: '💰', effect: '+50', type: 'add', value: 50, term: 'airdrop' }],
+        [{ emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }, { emoji: '💸', effect: '-30', type: 'subtract', value: 30, term: 'gasFee' }]
+      ],
+      4: [
+        [{ emoji: '💰', effect: '+50', type: 'add', value: 50, term: 'airdrop' }, { emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }],
+        [{ emoji: '💸', effect: '-40', type: 'subtract', value: 40, term: 'gasFee' }, { emoji: '🌊', effect: '÷2', type: 'divide', value: 2, term: 'slippage' }],
+        [{ emoji: '🚀', effect: '×3', type: 'multiply', value: 3, term: 'moonshot' }, { emoji: '💰', effect: '+80', type: 'add', value: 80, term: 'airdrop' }],
+        [{ emoji: '💀', effect: '-50%', type: 'percentage', value: 50, term: 'rugPull' }, { emoji: '💰', effect: '+70', type: 'add', value: 70, term: 'airdrop' }],
+        [{ emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }, { emoji: '💸', effect: '-60', type: 'subtract', value: 60, term: 'gasFee' }],
+        [{ emoji: '💰', effect: '+40', type: 'add', value: 40, term: 'airdrop' }, { emoji: '🌊', effect: '÷2', type: 'divide', value: 2, term: 'slippage' }],
+        [{ emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }, { emoji: '💸', effect: '-80', type: 'subtract', value: 80, term: 'gasFee' }]
+      ],
+      5: [
+        [{ emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }, { emoji: '💰', effect: '+100', type: 'add', value: 100, term: 'airdrop' }],
+        [{ emoji: '📉', effect: '÷3', type: 'divide', value: 3, term: 'impermanentLoss' }, { emoji: '💸', effect: '-100', type: 'subtract', value: 100, term: 'gasFee' }],
+        [{ emoji: '💰', effect: '+200', type: 'add', value: 200, term: 'airdrop' }, { emoji: '🚀', effect: '×3', type: 'multiply', value: 3, term: 'moonshot' }],
+        [{ emoji: '💀', effect: '-50%', type: 'percentage', value: 50, term: 'rugPull' }, { emoji: '💰', effect: '+150', type: 'add', value: 150, term: 'airdrop' }],
+        [{ emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }, { emoji: '💸', effect: '-200', type: 'subtract', value: 200, term: 'gasFee' }],
+        [{ emoji: '💰', effect: '+250', type: 'add', value: 250, term: 'airdrop' }, { emoji: '🌊', effect: '÷2', type: 'divide', value: 2, term: 'slippage' }],
+        [{ emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }, { emoji: '💸', effect: '-300', type: 'subtract', value: 300, term: 'gasFee' }]
+      ]
+    };
+
     const getGateOptions = (level: number, gatesPassed: number) => {
-      const currentWealth = wealthRef.current;
-      const levelGoal = levelConfig[level as keyof typeof levelConfig]?.goal || 100;
-      const gatesRemaining = 4 - gatesPassed;
-      const wealthNeeded = Math.max(0, levelGoal - currentWealth);
-      
-      // Calculate if we can still win with remaining gates
-      const canStillWin = (wealth: number, gates: number) => {
-        // Optimistic scenario: best possible multipliers
-        const maxPossible = wealth * Math.pow(6, gates); // Updated max 6x multiplier
-        return maxPossible >= levelGoal;
-      };
-
-      // Define gate templates by difficulty - scaled for higher level goals
-      const easyGates = [
-        { emoji: '🎁', effect: '+15', type: 'add', value: 15, term: 'airdrop' },
-        { emoji: '🌾', effect: '+25', type: 'add', value: 25, term: 'yieldFarming' },
-        { emoji: '💎', effect: '+35', type: 'add', value: 35, term: 'stakingReward' },
-        { emoji: '🔄', effect: '+50', type: 'add', value: 50, term: 'arbitrage' },
-        { emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' },
-        { emoji: '🚀', effect: '×3', type: 'multiply', value: 3, term: 'moonshot' }
-      ];
-
-      const mediumGates = [
-        { emoji: '💎', effect: '×4', type: 'multiply', value: 4, term: 'stakingReward' },
-        { emoji: '🚀', effect: '×5', type: 'multiply', value: 5, term: 'moonshot' },
-        { emoji: '⚡', effect: '×6', type: 'multiply', value: 6, term: 'flashLoan' },
-        { emoji: '⛽', effect: '-10', type: 'subtract', value: 10, term: 'gasFee' },
-        { emoji: '📉', effect: '-15', type: 'subtract', value: 15, term: 'impermanentLoss' },
-        { emoji: '🌊', effect: '/2', type: 'divide', value: 2, term: 'slippage' }
-      ];
-
-      const hardGates = [
-        { emoji: '💀', effect: '/3', type: 'divide', value: 3, term: 'rugPull' },
-        { emoji: '🔥', effect: '/4', type: 'divide', value: 4, term: 'liquidation' },
-        { emoji: '🥪', effect: '-40', type: 'subtract', value: 40, term: 'sandwich' },
-        { emoji: '📄', effect: '/5', type: 'divide', value: 5, term: 'paperHands' },
-        { emoji: '🐋', effect: '/6', type: 'divide', value: 6, term: 'whale' },
-        { emoji: '😱', effect: '-60', type: 'subtract', value: 60, term: 'fomo' }
-      ];
-
-      const brutalGates = [
-        { emoji: '💀', effect: '/8', type: 'divide', value: 8, term: 'rugPull' },
-        { emoji: '🔥', effect: '/10', type: 'divide', value: 10, term: 'liquidation' },
-        { emoji: '🥪', effect: '-80', type: 'subtract', value: 80, term: 'sandwich' },
-        { emoji: '😱', effect: '/12', type: 'divide', value: 12, term: 'fomo' },
-        { emoji: '📄', effect: '-100', type: 'subtract', value: 100, term: 'paperHands' },
-        { emoji: '🐋', effect: '/15', type: 'divide', value: 15, term: 'whale' }
-      ];
-
-      // Determine difficulty mix based on level and progress
-      let easyWeight, mediumWeight, hardWeight, brutalWeight;
-      
-      switch(level) {
-        case 1: // DeFi Rookie - mostly easy with some medium
-          easyWeight = 0.6; mediumWeight = 0.3; hardWeight = 0.1; brutalWeight = 0.0;
-          break;
-        case 2: // Yield Hunter - balanced mix
-          easyWeight = 0.4; mediumWeight = 0.4; hardWeight = 0.2; brutalWeight = 0.0;
-          break;
-        case 3: // Protocol Master - getting harder
-          easyWeight = 0.3; mediumWeight = 0.4; hardWeight = 0.3; brutalWeight = 0.0;
-          break;
-        case 4: // Whale Territory - mostly hard
-          easyWeight = 0.2; mediumWeight = 0.3; hardWeight = 0.4; brutalWeight = 0.1;
-          break;
-        case 5: // DeFi Legend - nightmare mode
-          easyWeight = 0.1; mediumWeight = 0.2; hardWeight = 0.4; brutalWeight = 0.3;
-          break;
-        default:
-          easyWeight = 0.4; mediumWeight = 0.4; hardWeight = 0.2; brutalWeight = 0.0;
-      }
-
-      // Adjust weights based on current situation
-      if (wealthNeeded > currentWealth) {
-        // Need more wealth - increase easy gates
-        easyWeight += 0.2;
-        mediumWeight += 0.1;
-        hardWeight -= 0.2;
-        brutalWeight -= 0.1;
-      } else if (currentWealth > levelGoal * 1.5) {
-        // Too much wealth - increase difficulty
-        easyWeight -= 0.2;
-        mediumWeight -= 0.1;
-        hardWeight += 0.2;
-        brutalWeight += 0.1;
-      }
-
-      // Ensure all weights are non-negative and normalize
-      easyWeight = Math.max(0, easyWeight);
-      mediumWeight = Math.max(0, mediumWeight);
-      hardWeight = Math.max(0, hardWeight);
-      brutalWeight = Math.max(0, brutalWeight);
-
-      // Normalize weights to ensure they sum to 1
-      const totalWeight = easyWeight + mediumWeight + hardWeight + brutalWeight;
-      if (totalWeight > 0) {
-        easyWeight /= totalWeight;
-        mediumWeight /= totalWeight;
-        hardWeight /= totalWeight;
-        brutalWeight /= totalWeight;
-      } else {
-        // Fallback to balanced weights if all are zero
-        easyWeight = 0.4;
-        mediumWeight = 0.4;
-        hardWeight = 0.2;
-        brutalWeight = 0.0;
-      }
-
-      // Ensure at least one path to victory exists
-      const generateBalancedGates = () => {
-        const gates = [];
-        
-        // Select gate types based on weights (ensure non-negative lengths)
-        const easyCount = Math.max(0, Math.round(easyWeight * 10));
-        const mediumCount = Math.max(0, Math.round(mediumWeight * 10));
-        const hardCount = Math.max(0, Math.round(hardWeight * 10));
-        const brutalCount = Math.max(0, Math.round(brutalWeight * 10));
-        
-        const gateTypes = [
-          ...Array(easyCount).fill('easy'),
-          ...Array(mediumCount).fill('medium'),
-          ...Array(hardCount).fill('hard'),
-          ...Array(brutalCount).fill('brutal')
+      const gates = levelGates[level as keyof typeof levelGates];
+      if (!gates || gatesPassed >= gates.length) {
+        // Fallback to last gate if we exceed the predefined gates
+        const lastGate = gates?.[gates.length - 1] || [
+          { emoji: '💰', effect: '+10', type: 'add', value: 10, term: 'airdrop' },
+          { emoji: '💸', effect: '-5', type: 'subtract', value: 5, term: 'gasFee' }
         ];
-
-        // Ensure we have at least some gate types available
-        if (gateTypes.length === 0) {
-          gateTypes.push('easy', 'medium');
-        }
-
-        const usedGates = new Set();
-        
-        for (let i = 0; i < 2; i++) {
-          let attempts = 0;
-          let selectedGate;
-          
-          do {
-            const randomType = gateTypes[Math.floor(Math.random() * gateTypes.length)];
-            let gatePool;
-            
-            switch(randomType) {
-              case 'easy': gatePool = easyGates; break;
-              case 'medium': gatePool = mediumGates; break;
-              case 'hard': gatePool = hardGates; break;
-              case 'brutal': gatePool = brutalGates; break;
-              default: gatePool = mediumGates;
-            }
-            
-            selectedGate = gatePool[Math.floor(Math.random() * gatePool.length)];
-            attempts++;
-          } while (usedGates.has(selectedGate.effect) && attempts < 10);
-          
-          usedGates.add(selectedGate.effect);
-          gates.push(selectedGate);
-        }
-
-        return gates;
-      };
-
-      // Generate gates and ensure at least one viable path exists
-      let leftGate, rightGate;
-      let attempts = 0;
+        return lastGate;
+      }
       
-      do {
-        [leftGate, rightGate] = generateBalancedGates();
-        attempts++;
-        
-        // Calculate potential outcomes
-        const leftOutcome = calculateOutcome(currentWealth, leftGate);
-        const rightOutcome = calculateOutcome(currentWealth, rightGate);
-        
-        // Check if either path can lead to victory
-        const leftCanWin = canStillWin(leftOutcome, gatesRemaining - 1);
-        const rightCanWin = canStillWin(rightOutcome, gatesRemaining - 1);
-        
-        // If both paths are dead ends and we have attempts left, regenerate
-        if ((!leftCanWin && !rightCanWin) && attempts < 5) {
-          continue;
-        }
-        
-        // If we still can't find a good combination, ensure at least one positive option
-        if (attempts >= 5 && !leftCanWin && !rightCanWin) {
-          if (Math.random() > 0.5) {
-            leftGate = easyGates[Math.floor(Math.random() * easyGates.length)];
-          } else {
-            rightGate = easyGates[Math.floor(Math.random() * easyGates.length)];
-          }
-        }
-        
-        break;
-      } while (attempts < 10);
-
-      // Randomize left/right placement
-      return Math.random() > 0.5 ? [leftGate, rightGate] : [rightGate, leftGate];
+      return gates[gatesPassed];
     };
 
     // Helper function to calculate outcome of a gate
@@ -342,6 +207,7 @@ export default function ArbiRush() {
         case 'multiply': return Math.floor(wealth * gate.value);
         case 'subtract': return Math.max(0, wealth - gate.value);
         case 'divide': return Math.max(0, Math.floor(wealth / gate.value));
+        case 'percentage': return Math.max(0, Math.floor(wealth * (100 - gate.value) / 100));
         default: return wealth;
       }
     };
@@ -355,7 +221,7 @@ export default function ArbiRush() {
         x: lanePositions[0],
         y: spawnY,
         lane: 0,
-        type: leftOption.type as 'add' | 'multiply' | 'subtract' | 'divide',
+        type: leftOption.type as 'add' | 'multiply' | 'subtract' | 'divide' | 'percentage',
         emoji: leftOption.emoji,
         effect: leftOption.effect,
         value: leftOption.value,
@@ -366,7 +232,7 @@ export default function ArbiRush() {
         x: lanePositions[1],
         y: spawnY,
         lane: 1,
-        type: rightOption.type as 'add' | 'multiply' | 'subtract' | 'divide',
+        type: rightOption.type as 'add' | 'multiply' | 'subtract' | 'divide' | 'percentage',
         emoji: rightOption.emoji,
         effect: rightOption.effect,
         value: rightOption.value,
@@ -496,6 +362,9 @@ export default function ArbiRush() {
               break;
             case 'divide':
               newWealth = Math.max(0, Math.floor(currentWealth / item.value));
+              break;
+            case 'percentage':
+              newWealth = Math.max(0, Math.floor(currentWealth * (100 - item.value) / 100));
               break;
             default:
               console.warn(`Unknown item type: ${item.type}`);
