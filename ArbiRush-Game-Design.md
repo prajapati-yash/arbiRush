@@ -1,4 +1,4 @@
-# ArbiRun - Game Design Outline
+# ArbiRush - Game Design Outline
 
 ## Core Game Loop
 - Player character auto-runs forward continuously

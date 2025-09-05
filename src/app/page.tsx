@@ -5,7 +5,7 @@ import EnhancedWalletConnection from '@/components/EnhancedWalletConnection';
 import GameHeaderUser from '@/components/GameHeaderUser';
 import { useUserConnection } from '@/hooks/useUserConnection';
 
-export default function ArbiRun() {
+export default function ArbiRush() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [wealth, setWealth] = useState(10);
   const wealthRef = useRef(10);
@@ -50,7 +50,7 @@ export default function ArbiRun() {
     5: {
       goal: 500,
       title: "DeFi Legend",
-      story: "This is it - the final challenge! The entire crypto ecosystem is in chaos. Only true DeFi legends can navigate to $500. Will you become the ultimate ArbiRun champion?",
+      story: "This is it - the final challenge! The entire crypto ecosystem is in chaos. Only true DeFi legends can navigate to $500. Will you become the ultimate ArbiRush champion?",
       description: "Become the ultimate DeFi legend"
     }
   };
@@ -774,12 +774,6 @@ export default function ArbiRun() {
   };
 
   const startGame = () => {
-    // Check if wallet is connected before starting game
-    if (!isConnected) {
-      alert('Please connect your wallet to start playing ArbiRun!');
-      return;
-    }
-    
     // Reset to level 1 when starting fresh
     setCurrentLevel(1);
     setWealth(10);
@@ -827,10 +821,16 @@ export default function ArbiRun() {
         // Start Screen
         <div className="text-center z-20">
           <div className="text-6xl font-bold text-transparent bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text mb-8">
-            ArbiRun
+            ArbiRush
           </div>
-          <div className="text-xl text-cyan-300 mb-8">
+          <div className="text-xl text-cyan-300 mb-4">
             Navigate through the DeFi gates and manage your wealth!
+          </div>
+          <div className="text-sm text-gray-300 mb-8">
+            {isConnected 
+              ? "💰 Connected - Your progress will be saved!" 
+              : "🎮 Play as guest or connect wallet to save progress"
+            }
           </div>
           
           {/* Wallet Connection Component */}
@@ -841,15 +841,9 @@ export default function ArbiRun() {
           <div className="flex flex-col space-y-4">
             <button
               onClick={startGame}
-              className={`${
-                isConnected 
-                  ? 'bg-gradient-to-r from-green-600 to-cyan-600 hover:from-green-700 hover:to-cyan-700 hover:shadow-green-500/25' 
-                  : 'bg-gradient-to-r from-gray-600 to-slate-600 hover:from-gray-700 hover:to-slate-700'
-              } text-white px-12 py-4 rounded-xl font-bold text-xl shadow-lg transition-all duration-300 border ${
-                isConnected ? 'border-green-400/30' : 'border-gray-400/30'
-              }`}
+              className="bg-gradient-to-r from-green-600 to-cyan-600 hover:from-green-700 hover:to-cyan-700 text-white px-12 py-4 rounded-xl font-bold text-xl shadow-lg hover:shadow-green-500/25 transition-all duration-300 border border-green-400/30"
             >
-              {isConnected ? '🚀 Start Game' : '🔒 Connect Wallet to Play'}
+              {isConnected ? '🚀 Start Game' : '🎮 Play as Guest'}
             </button>
             <button
               onClick={showLeaderboard}
@@ -945,7 +939,7 @@ export default function ArbiRun() {
             <>
               <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-slate-900/90 to-purple-900/90 backdrop-blur-sm p-4 flex justify-between items-center z-10 border-b border-cyan-400/30">
                 <div className="text-lg font-bold text-transparent bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text">
-                  ArbiRun
+                  ArbiRush
                 </div>
                 <div className="flex items-center space-x-4">
                   <div className="bg-gradient-to-r from-purple-600 to-cyan-600 px-4 py-2 rounded-full text-sm font-bold shadow-lg">

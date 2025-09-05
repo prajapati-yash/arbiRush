@@ -11,13 +11,13 @@ export const config = createConfig({
   connectors: [
     farcasterFrame(),
     coinbaseWallet({
-      appName: 'ArbiRun',
+      appName: 'ArbiRush',
       appLogoUrl: 'https://arbirush.vercel.app/icon.png',
       preference: "all",
     }),
     metaMask({
       dappMetadata: {
-        name: 'ArbiRun',
+        name: 'ArbiRush',
         url: 'https://arbirush.vercel.app',
         iconUrl: 'https://arbirush.vercel.app/icon.png',
       },

@@ -1,11 +1,11 @@
 {
   "miniapp": {
     "version": "1",
-    "name": "ArbiRun",
+    "name": "ArbiRush",
     "iconUrl": "https://arbirush.vercel.app/icon.png",
     "homeUrl": "https://arbirush.vercel.app/",
     "imageUrl": "https://arbirush.vercel.app/og-image.png",
-    "buttonTitle": "🚀 Start ArbiRun",
+    "buttonTitle": "🚀 Start ArbiRush",
     "splashImageUrl": "https://arbirush.vercel.app/og-image.png",
     "splashBackgroundColor": "#0f0e23",
     "webhookUrl": "https://arbirush.vercel.app/api/webhook",

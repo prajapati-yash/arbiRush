@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ArbiRun - DeFi Adventure Game",
+  title: "ArbiRush - DeFi Adventure Game",
   description: "Navigate through DeFi gates and manage your wealth in this exciting crypto adventure!",
 };
 
@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="fc:frame" content='{"version":"next","imageUrl":"https://arbirush.vercel.app/og-image.png","button":{"title":"🚀 Start ArbiRun","action":{"type":"launch_miniapp","name":"ArbiRun","url":"https://arbirush.vercel.app","splashImageUrl":"https://arbirush.vercel.app/og-image.png","splashBackgroundColor":"#0f0e23"}}}' />
+        <meta name="fc:frame" content='{"version":"next","imageUrl":"https://arbirush.vercel.app/og-image.png","button":{"title":"🚀 Start ArbiRush","action":{"type":"launch_miniapp","name":"ArbiRush","url":"https://arbirush.vercel.app","splashImageUrl":"https://arbirush.vercel.app/og-image.png","splashBackgroundColor":"#0f0e23"}}}' />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

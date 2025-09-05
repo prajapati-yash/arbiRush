@@ -167,7 +167,7 @@ export default function WalletConnection() {
       <div className="text-center">
         <div className="text-cyan-400 mb-2">🔗</div>
         <div className="text-sm text-gray-300 mb-3">
-          Connect your wallet to play ArbiRun
+          Connect your wallet to play ArbiRush
         </div>
         <button
           onClick={() => setShowConnectors(true)}
