@@ -23,4 +23,5 @@ export const config = createConfig({
       },
     }),
   ],
+  ssr: true, // Add SSR support to prevent hydration issues
 });

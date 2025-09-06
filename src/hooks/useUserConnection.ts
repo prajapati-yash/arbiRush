@@ -94,6 +94,10 @@ export function useUserConnection() {
       await connect({ connector: selectedConnector });
     } catch (error) {
       console.error('Failed to connect wallet:', error);
+      // Add specific handling for account mapping issues
+      if (error instanceof Error && error.message.includes('accounts.map')) {
+        console.error('Wagmi accounts mapping error - this is usually a compatibility issue');
+      }
     } finally {
       setIsLoading(false);
     }

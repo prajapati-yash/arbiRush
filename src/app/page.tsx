@@ -1,6 +1,8 @@
 'use client';
 
 import { useGameState } from '@/hooks/game/useGameState';
+import { useUserConnection } from '@/hooks/useUserConnection';
+import { useUserProgress } from '@/hooks/useUserProgress';
 import { levelConfig } from '@/config/gameConfig';
 
 // Screen Components
@@ -20,6 +22,27 @@ import GameTooltip from '@/components/game/GameTooltip';
 import GameInstructions from '@/components/game/GameInstructions';
 
 export default function ArbiRush() {
+  // User connection and progress hooks
+  const { isConnected, userDetails } = useUserConnection();
+  const { userProgress, saveProgress, getStartingLevel } = useUserProgress({
+    userDetails,
+    isConnected
+  });
+
+  // Handle level completion and save progress
+  const handleLevelComplete = async (level: number, wealth: number, gatesPassed: number, timeTaken: number) => {
+    if (isConnected && userDetails?.address) {
+      await saveProgress({
+        currentLevel: level + 1, // Next level to start from
+        currentWealth: wealth,
+        gatesPassed,
+        timeTaken,
+        isLevelCompletion: true
+      });
+    }
+  };
+
+  // Game state hook with progress integration
   const {
     // State
     wealth,
@@ -51,7 +74,16 @@ export default function ArbiRush() {
     backToStart,
     showInfoScreen,
     continueFromStory
-  } = useGameState();
+  } = useGameState({
+    onLevelComplete: handleLevelComplete,
+    initialLevel: getStartingLevel()
+  });
+
+  const handleStartGame = () => {
+    // Start from saved progress level or level 1
+    const startingLevel = getStartingLevel();
+    startGame(startingLevel);
+  };
 
   const handleNextLevel = () => {
     nextLevel(levelConfig);
@@ -61,9 +93,11 @@ export default function ArbiRush() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#000030] via-[#000056]/80 to-[#000030] text-white relative overflow-hidden">
       {gameState === 'start' ? (
         <StartScreen 
-          onStartGame={startGame}
+          onStartGame={handleStartGame}
           onShowLeaderboard={showLeaderboard}
           onShowInfoScreen={showInfoScreen}
+          userProgress={userProgress}
+          isConnected={isConnected}
         />
       ) : gameState === 'leaderboard' ? (
         <LeaderboardScreen onBackToStart={backToStart} />

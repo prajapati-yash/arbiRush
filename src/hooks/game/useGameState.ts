@@ -1,24 +1,33 @@
 import { useState, useRef } from 'react';
 import { GameState, HoveredGate, LevelConfig } from '@/types/game';
 
-export const useGameState = () => {
+interface UseGameStateProps {
+  onLevelComplete?: (level: number, wealth: number, gatesPassed: number, timeTaken: number) => Promise<void>;
+  initialLevel?: number;
+}
+
+export const useGameState = ({ onLevelComplete, initialLevel = 1 }: UseGameStateProps = {}) => {
   const [wealth, setWealth] = useState(10);
   const wealthRef = useRef(10);
   const [gameOver, setGameOver] = useState(false);
   const [levelComplete, setLevelComplete] = useState(false);
-  const [currentLevel, setCurrentLevel] = useState(1);
+  const [currentLevel, setCurrentLevel] = useState(initialLevel);
   const [gatesInLevel, setGatesInLevel] = useState(0);
   const [gameState, setGameState] = useState<GameState>('start');
   const [countdown, setCountdown] = useState(3);
-  const [maxLevel, setMaxLevel] = useState(1);
+  const [maxLevel, setMaxLevel] = useState(initialLevel);
   const [hoveredGate, setHoveredGate] = useState<HoveredGate | null>(null);
+  
+  // Level timing tracking
+  const [levelStartTime, setLevelStartTime] = useState<number | null>(null);
+  const levelStartTimeRef = useRef<number | null>(null);
 
   const resetGame = () => {
     setGameOver(false);
     setLevelComplete(false);
     setWealth(10);
     wealthRef.current = 10;
-    setCurrentLevel(1);
+    setCurrentLevel(initialLevel);
     setGatesInLevel(0);
     setGameState('start');
   };
@@ -31,6 +40,10 @@ export const useGameState = () => {
         if (prev <= 1) {
           clearInterval(countdownTimer);
           setGameState('playing');
+          // Start timing when gameplay begins
+          const startTime = Date.now();
+          setLevelStartTime(startTime);
+          levelStartTimeRef.current = startTime;
           return 3;
         }
         return prev - 1;
@@ -38,18 +51,31 @@ export const useGameState = () => {
     }, 1000);
   };
 
-  const startGame = () => {
-    // Reset to level 1 when starting fresh
-    setCurrentLevel(1);
+  const startGame = (startingLevel?: number) => {
+    // Use starting level from user progress or default to initial level
+    const levelToStart = startingLevel || initialLevel;
+    setCurrentLevel(levelToStart);
     setWealth(10);
     wealthRef.current = 10;
     startCountdown();
   };
 
-  const nextLevel = (levelConfig: Record<number, LevelConfig>) => {
+  const nextLevel = async (levelConfig: Record<number, LevelConfig>) => {
     const goalAchieved = wealth >= (levelConfig[currentLevel]?.goal || 100);
     
     if (goalAchieved && currentLevel < 5) {
+      // Calculate time taken for this level
+      const timeTaken = levelStartTimeRef.current ? Date.now() - levelStartTimeRef.current : 0;
+      
+      // Save progress before moving to next level
+      if (onLevelComplete) {
+        try {
+          await onLevelComplete(currentLevel, wealth, gatesInLevel, timeTaken);
+        } catch (error) {
+          console.error('Failed to save progress:', error);
+        }
+      }
+      
       // Goal achieved - proceed to next level
       setCurrentLevel(currentLevel + 1);
       setLevelComplete(false);
