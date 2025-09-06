@@ -48,7 +48,7 @@ export interface LevelConfig {
 }
 
 export interface DefiTerm {
-  emoji: string;
+  icon: React.ElementType;
   name: string;
   description: string;
 }

@@ -48,21 +48,21 @@ export default function LevelCompleteScreen({
         {goalAchieved && !isMaxLevel ? (
           <button
             onClick={onNextLevel}
-            className="bg-gradient-to-r from-green-600 to-cyan-600 hover:from-green-700 hover:to-cyan-700 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-green-500/25 transition-all duration-300 border border-green-400/30"
+            className="cursor-pointer bg-gradient-to-r from-green-600 to-cyan-600 hover:from-green-700 hover:to-cyan-700 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-green-500/25 transition-all duration-300 border border-green-400/30"
           >
             Next Level
           </button>
         ) : (
           <button
             onClick={onRetryLevel}
-            className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-orange-500/25 transition-all duration-300 border border-orange-400/30"
+            className="cursor-pointer bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-orange-500/25 transition-all duration-300 border border-orange-400/30"
           >
             Retry Level {currentLevel}
           </button>
         )}
         <button
           onClick={onResetGame}
-          className="bg-gradient-to-r from-purple-600 to-slate-600 hover:from-purple-700 hover:to-slate-700 text-white px-6 py-4 rounded-xl font-bold text-lg shadow-lg transition-all duration-300 border border-purple-400/30"
+          className="cursor-pointer bg-gradient-to-r from-purple-600 to-slate-600 hover:from-purple-700 hover:to-slate-700 text-white px-6 py-4 rounded-xl font-bold text-lg shadow-lg transition-all duration-300 border border-purple-400/30"
         >
           Back to Menu
         </button>

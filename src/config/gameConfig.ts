@@ -1,4 +1,30 @@
 import { LevelConfig, DefiTerm, GateOption } from '@/types/game';
+import { 
+  FaSeedling, 
+  FaGift, 
+  FaSkull, 
+  FaGasPump, 
+  FaFire, 
+  FaBolt, 
+  FaChartLine,
+  FaGem, 
+  FaExchangeAlt,
+  FaLayerGroup,
+  FaWater,
+  FaRocket,
+  FaHandPaper,
+  FaPaperPlane
+} from 'react-icons/fa';
+import { 
+  GiWhaleTail,
+  GiPaperPlane,
+  GiDiamonds,
+  GiFomorian 
+} from 'react-icons/gi';
+import { 
+  MdTrendingDown,
+  MdAttachMoney,
+} from 'react-icons/md';
 
 export const levelConfig: Record<number, LevelConfig> = {
   1: {
@@ -34,22 +60,22 @@ export const levelConfig: Record<number, LevelConfig> = {
 };
 
 export const defiTerms: Record<string, DefiTerm> = {
-  'yieldFarming': { emoji: '🌾', name: 'Yield Farming', description: 'Earn rewards by providing liquidity to DeFi protocols' },
-  'airdrop': { emoji: '🎁', name: 'Airdrop', description: 'Free tokens distributed to wallet holders' },
-  'rugPull': { emoji: '💀', name: 'Rug Pull', description: 'Scam where developers drain liquidity and disappear' },
-  'gasFee': { emoji: '⛽', name: 'Gas Fee', description: 'Transaction cost on the blockchain network' },
-  'liquidation': { emoji: '🔥', name: 'Liquidation', description: 'Forced selling of assets to cover losses' },
-  'flashLoan': { emoji: '⚡', name: 'Flash Loan', description: 'Instant uncollateralized loan that must be repaid in one transaction' },
-  'impermanentLoss': { emoji: '📉', name: 'Impermanent Loss', description: 'Temporary loss when providing liquidity in volatile pairs' },
-  'stakingReward': { emoji: '💎', name: 'Staking Reward', description: 'Earn passive income by staking tokens' },
-  'arbitrage': { emoji: '🔄', name: 'Arbitrage', description: 'Profit from price differences across exchanges' },
-  'sandwich': { emoji: '🥪', name: 'Sandwich Attack', description: 'MEV strategy that profits from your transactions' },
-  'slippage': { emoji: '🌊', name: 'Slippage', description: 'Price difference between expected and actual trade execution' },
-  'moonshot': { emoji: '🚀', name: 'Moonshot', description: 'High-risk investment with potential massive returns' },
-  'diamond': { emoji: '💎', name: 'Diamond Hands', description: 'Holding investments despite market volatility' },
-  'paperHands': { emoji: '📄', name: 'Paper Hands', description: 'Selling investments at the first sign of loss' },
-  'whale': { emoji: '🐋', name: 'Crypto Whale', description: 'Large holder who can influence market prices' },
-  'fomo': { emoji: '😱', name: 'FOMO', description: 'Fear of Missing Out on potential gains' }
+  'yieldFarming': { icon: FaSeedling, name: 'Yield Farming', description: 'Earn rewards by providing liquidity to DeFi protocols' },
+  'airdrop': { icon: FaGift, name: 'Airdrop', description: 'Free tokens distributed to wallet holders' },
+  'rugPull': { icon: FaSkull, name: 'Rug Pull', description: 'Scam where developers drain liquidity and disappear' },
+  'gasFee': { icon: FaGasPump, name: 'Gas Fee', description: 'Transaction cost on the blockchain network' },
+  'liquidation': { icon: FaFire, name: 'Liquidation', description: 'Forced selling of assets to cover losses' },
+  'flashLoan': { icon: FaBolt, name: 'Flash Loan', description: 'Instant uncollateralized loan that must be repaid in one transaction' },
+  'impermanentLoss': { icon: MdTrendingDown, name: 'Impermanent Loss', description: 'Temporary loss when providing liquidity in volatile pairs' },
+  'stakingReward': { icon: FaGem, name: 'Staking Reward', description: 'Earn passive income by staking tokens' },
+  'arbitrage': { icon: FaExchangeAlt, name: 'Arbitrage', description: 'Profit from price differences across exchanges' },
+  'sandwich': { icon: FaLayerGroup, name: 'Sandwich Attack', description: 'MEV strategy that profits from your transactions' },
+  'slippage': { icon: FaWater, name: 'Slippage', description: 'Price difference between expected and actual trade execution' },
+  'moonshot': { icon: FaRocket, name: 'Moonshot', description: 'High-risk investment with potential massive returns' },
+  'diamond': { icon: GiDiamonds, name: 'Diamond Hands', description: 'Holding investments despite market volatility' },
+  'paperHands': { icon: FaHandPaper, name: 'Paper Hands', description: 'Selling investments at the first sign of loss' },
+  'whale': { icon: GiWhaleTail, name: 'Crypto Whale', description: 'Large holder who can influence market prices' },
+  'fomo': { icon: GiFomorian, name: 'FOMO', description: 'Fear of Missing Out on potential gains' }
 };
 
 export const levelGates: Record<number, GateOption[][]> = {

@@ -8,9 +8,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-luckiest: var(--font-luckiest-guy);
+  --font-pressStart: var(--font-press-start-2p);
+  --font-saira: var(--font-saira);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -25,11 +24,6 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
-
-/* Hide default cursor */
-/* * {
-  cursor: none !important;
-} */
 
 /* Custom gradient backgrounds */
 .bg-gradient-radial {

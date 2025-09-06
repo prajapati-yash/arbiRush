@@ -1,21 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Luckiest_Guy } from "next/font/google";
+import {  Press_Start_2P, Saira   } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/app/providers";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-const luckiestGuy = Luckiest_Guy({
+const pressStart2P = Press_Start_2P({
   subsets: ["latin"],
   weight: "400",
-  variable: "--font-luckiest-guy",
+  variable: "--font-press-start-2p",
+});
+// ✅ Add Saira
+const saira = Saira({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"], // choose the weights you need
+  variable: "--font-saira",
 });
 
 export const metadata: Metadata = {
@@ -34,7 +32,7 @@ export default function RootLayout({
         <meta name="fc:frame" content='{"version":"next","imageUrl":"https://arbirush.vercel.app/og-image.png","button":{"title":"🚀 Start ArbiRush","action":{"type":"launch_miniapp","name":"ArbiRush","url":"https://arbirush.vercel.app","splashImageUrl":"https://arbirush.vercel.app/og-image.png","splashBackgroundColor":"#0f0e23"}}}' />
       </head>
       <body
-        className={`${luckiestGuy.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${saira.variable} ${pressStart2P.variable} antialiased`}
       >
         <Providers>
           {children}

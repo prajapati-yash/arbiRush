@@ -22,7 +22,7 @@ export default function GameHeader({ currentLevel, onShowInfoScreen }: GameHeade
           </div>
           <button
             onClick={onShowInfoScreen}
-            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg transition-all duration-300 border border-blue-400/30"
+            className="cursor-pointer bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg transition-all duration-300 border border-blue-400/30"
           >
             ℹ️
           </button>
