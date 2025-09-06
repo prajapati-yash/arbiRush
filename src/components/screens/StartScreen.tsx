@@ -16,9 +16,10 @@ export default function StartScreen({
 
   return (
     <div className="text-center z-20">
-      <div className="text-6xl font-bold text-transparent bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text mb-8">
-        ArbiRush
-      </div>
+      <div className="font-luckiest text-6xl font-bold text-transparent bg-gradient-to-r from-[#a7f5f9] via-[#60a5fa] to-[#1e3a8a] bg-clip-text mb-8">
+  ArbiRush
+</div>
+
       <div className="text-xl text-cyan-300 mb-4">
         Navigate through the DeFi gates and manage your wealth!
       </div>

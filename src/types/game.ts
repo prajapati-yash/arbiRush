@@ -56,7 +56,7 @@ export interface DefiTerm {
 export interface GateOption {
   emoji: string;
   effect: string;
-  type: string;
+  type: 'add' | 'multiply' | 'subtract' | 'divide' | 'percentage';
   value: number;
   term: string;
 }

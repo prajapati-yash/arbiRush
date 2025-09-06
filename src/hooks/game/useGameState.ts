@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { GameState, HoveredGate } from '@/types/game';
+import { GameState, HoveredGate, LevelConfig } from '@/types/game';
 
 export const useGameState = () => {
   const [wealth, setWealth] = useState(10);
@@ -46,7 +46,7 @@ export const useGameState = () => {
     startCountdown();
   };
 
-  const nextLevel = (levelConfig: any) => {
+  const nextLevel = (levelConfig: Record<number, LevelConfig>) => {
     const goalAchieved = wealth >= (levelConfig[currentLevel]?.goal || 100);
     
     if (goalAchieved && currentLevel < 5) {

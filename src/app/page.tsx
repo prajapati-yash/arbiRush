@@ -58,7 +58,7 @@ export default function ArbiRush() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-slate-900 via-purple-900 to-slate-800 text-white relative overflow-hidden">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#000030] via-[#000056]/80 to-[#000030] text-white relative overflow-hidden">
       {gameState === 'start' ? (
         <StartScreen 
           onStartGame={startGame}
