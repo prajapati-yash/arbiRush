@@ -141,47 +141,47 @@ export default function ArbiRush() {
     const levelGates = {
       1: [
         [{ emoji: '💰', effect: '+10', type: 'add', value: 10, term: 'airdrop' }, { emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }],
-        [{ emoji: '💸', effect: '-5', type: 'subtract', value: 5, term: 'gasFee' }, { emoji: '🌊', effect: '÷2', type: 'divide', value: 2, term: 'slippage' }],
+        [{ emoji: '💸', effect: '-5', type: 'subtract', value: 5, term: 'gasFee' }, { emoji: '🌊', effect: '/2', type: 'divide', value: 2, term: 'slippage' }],
         [{ emoji: '💰', effect: '+5', type: 'add', value: 5, term: 'airdrop' }, { emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }],
         [{ emoji: '📉', effect: '-10%', type: 'percentage', value: 10, term: 'impermanentLoss' }, { emoji: '💰', effect: '+10', type: 'add', value: 10, term: 'airdrop' }],
-        [{ emoji: '💰', effect: '+5', type: 'add', value: 5, term: 'airdrop' }, { emoji: '🌊', effect: '÷2', type: 'divide', value: 2, term: 'slippage' }],
+        [{ emoji: '💰', effect: '+5', type: 'add', value: 5, term: 'airdrop' }, { emoji: '🌊', effect: '/2', type: 'divide', value: 2, term: 'slippage' }],
         [{ emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }, { emoji: '💸', effect: '-5', type: 'subtract', value: 5, term: 'gasFee' }],
-        [{ emoji: '💰', effect: '+10', type: 'add', value: 10, term: 'airdrop' }, { emoji: '🌊', effect: '÷2', type: 'divide', value: 2, term: 'slippage' }]
+        [{ emoji: '💰', effect: '+10', type: 'add', value: 10, term: 'airdrop' }, { emoji: '🌊', effect: '/2', type: 'divide', value: 2, term: 'slippage' }]
       ],
       2: [
         [{ emoji: '💰', effect: '+20', type: 'add', value: 20, term: 'airdrop' }, { emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }],
-        [{ emoji: '📉', effect: '-10%', type: 'percentage', value: 10, term: 'impermanentLoss' }, { emoji: '🌊', effect: '÷2', type: 'divide', value: 2, term: 'slippage' }],
+        [{ emoji: '📉', effect: '-10%', type: 'percentage', value: 10, term: 'impermanentLoss' }, { emoji: '🌊', effect: '/2', type: 'divide', value: 2, term: 'slippage' }],
         [{ emoji: '💰', effect: '+15', type: 'add', value: 15, term: 'airdrop' }, { emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }],
         [{ emoji: '💸', effect: '-20', type: 'subtract', value: 20, term: 'gasFee' }, { emoji: '💰', effect: '+10', type: 'add', value: 10, term: 'airdrop' }],
         [{ emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }, { emoji: '💸', effect: '-15', type: 'subtract', value: 15, term: 'gasFee' }],
-        [{ emoji: '💰', effect: '+20', type: 'add', value: 20, term: 'airdrop' }, { emoji: '🌊', effect: '÷2', type: 'divide', value: 2, term: 'slippage' }],
+        [{ emoji: '💰', effect: '+20', type: 'add', value: 20, term: 'airdrop' }, { emoji: '🌊', effect: '/2', type: 'divide', value: 2, term: 'slippage' }],
         [{ emoji: '💰', effect: '+15', type: 'add', value: 15, term: 'airdrop' }, { emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }]
       ],
       3: [
         [{ emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }, { emoji: '💰', effect: '+25', type: 'add', value: 25, term: 'airdrop' }],
-        [{ emoji: '💸', effect: '-25', type: 'subtract', value: 25, term: 'gasFee' }, { emoji: '🌊', effect: '÷2', type: 'divide', value: 2, term: 'slippage' }],
+        [{ emoji: '💸', effect: '-25', type: 'subtract', value: 25, term: 'gasFee' }, { emoji: '🌊', effect: '/2', type: 'divide', value: 2, term: 'slippage' }],
         [{ emoji: '💰', effect: '+40', type: 'add', value: 40, term: 'airdrop' }, { emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }],
         [{ emoji: '📉', effect: '-10%', type: 'percentage', value: 10, term: 'impermanentLoss' }, { emoji: '💰', effect: '+30', type: 'add', value: 30, term: 'airdrop' }],
         [{ emoji: '🚀', effect: '×3', type: 'multiply', value: 3, term: 'moonshot' }, { emoji: '💸', effect: '-20', type: 'subtract', value: 20, term: 'gasFee' }],
-        [{ emoji: '🌊', effect: '÷2', type: 'divide', value: 2, term: 'slippage' }, { emoji: '💰', effect: '+50', type: 'add', value: 50, term: 'airdrop' }],
+        [{ emoji: '🌊', effect: '/2', type: 'divide', value: 2, term: 'slippage' }, { emoji: '💰', effect: '+50', type: 'add', value: 50, term: 'airdrop' }],
         [{ emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }, { emoji: '💸', effect: '-30', type: 'subtract', value: 30, term: 'gasFee' }]
       ],
       4: [
         [{ emoji: '💰', effect: '+50', type: 'add', value: 50, term: 'airdrop' }, { emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }],
-        [{ emoji: '💸', effect: '-40', type: 'subtract', value: 40, term: 'gasFee' }, { emoji: '🌊', effect: '÷2', type: 'divide', value: 2, term: 'slippage' }],
+        [{ emoji: '💸', effect: '-40', type: 'subtract', value: 40, term: 'gasFee' }, { emoji: '🌊', effect: '/2', type: 'divide', value: 2, term: 'slippage' }],
         [{ emoji: '🚀', effect: '×3', type: 'multiply', value: 3, term: 'moonshot' }, { emoji: '💰', effect: '+80', type: 'add', value: 80, term: 'airdrop' }],
         [{ emoji: '💀', effect: '-50%', type: 'percentage', value: 50, term: 'rugPull' }, { emoji: '💰', effect: '+70', type: 'add', value: 70, term: 'airdrop' }],
         [{ emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }, { emoji: '💸', effect: '-60', type: 'subtract', value: 60, term: 'gasFee' }],
-        [{ emoji: '💰', effect: '+40', type: 'add', value: 40, term: 'airdrop' }, { emoji: '🌊', effect: '÷2', type: 'divide', value: 2, term: 'slippage' }],
+        [{ emoji: '💰', effect: '+40', type: 'add', value: 40, term: 'airdrop' }, { emoji: '🌊', effect: '/2', type: 'divide', value: 2, term: 'slippage' }],
         [{ emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }, { emoji: '💸', effect: '-80', type: 'subtract', value: 80, term: 'gasFee' }]
       ],
       5: [
         [{ emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }, { emoji: '💰', effect: '+100', type: 'add', value: 100, term: 'airdrop' }],
-        [{ emoji: '📉', effect: '÷3', type: 'divide', value: 3, term: 'impermanentLoss' }, { emoji: '💸', effect: '-100', type: 'subtract', value: 100, term: 'gasFee' }],
+        [{ emoji: '📉', effect: '/3', type: 'divide', value: 3, term: 'impermanentLoss' }, { emoji: '💸', effect: '-100', type: 'subtract', value: 100, term: 'gasFee' }],
         [{ emoji: '💰', effect: '+200', type: 'add', value: 200, term: 'airdrop' }, { emoji: '🚀', effect: '×3', type: 'multiply', value: 3, term: 'moonshot' }],
         [{ emoji: '💀', effect: '-50%', type: 'percentage', value: 50, term: 'rugPull' }, { emoji: '💰', effect: '+150', type: 'add', value: 150, term: 'airdrop' }],
         [{ emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }, { emoji: '💸', effect: '-200', type: 'subtract', value: 200, term: 'gasFee' }],
-        [{ emoji: '💰', effect: '+250', type: 'add', value: 250, term: 'airdrop' }, { emoji: '🌊', effect: '÷2', type: 'divide', value: 2, term: 'slippage' }],
+        [{ emoji: '💰', effect: '+250', type: 'add', value: 250, term: 'airdrop' }, { emoji: '🌊', effect: '/2', type: 'divide', value: 2, term: 'slippage' }],
         [{ emoji: '⚡', effect: '×2', type: 'multiply', value: 2, term: 'flashLoan' }, { emoji: '💸', effect: '-300', type: 'subtract', value: 300, term: 'gasFee' }]
       ]
     };
@@ -380,8 +380,8 @@ export default function ArbiRush() {
           wealthRef.current = newWealth;
           setWealth(newWealth);
 
-          // Check if level is complete (4 gates per level)
-          if (internalGameState.gatesInCurrentLevel >= 4) {
+          // Check if level is complete (7 gates per level)
+          if (internalGameState.gatesInCurrentLevel >= 7) {
             const currentLevelGoal = levelConfig[currentLevel as keyof typeof levelConfig]?.goal || 100;
             
             // Check if goal is achieved
